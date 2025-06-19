@@ -1,0 +1,9 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.content {
+  padding: 16px;
+  height: calc(100vh - 64px); /* Account for toolbar height */
+  overflow-y: auto;
+}
