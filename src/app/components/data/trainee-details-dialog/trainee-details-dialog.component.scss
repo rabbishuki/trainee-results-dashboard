@@ -1,0 +1,127 @@
+.dialog-container {
+  max-height: 85vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+mat-dialog-content {
+  overflow-y: auto;
+  margin: 0 -15px 0 -10px;
+  max-height: calc(85vh - 140px);
+}
+
+h2 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 10px 0;
+  padding: 0;
+}
+
+.trainee-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-section {
+  border: 1px solid #e3f2fd;
+  border-radius: 12px;
+  padding: 10px 16px;
+  background: linear-gradient(145deg, #f8fbff 0%, #f0f7ff 100%);
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
+  border-left: 4px solid #1976d2;
+  margin: 0 0 16px;
+}
+
+.section-title {
+  margin: 0 0 16px 0;
+  color: #1976d2;
+  font-size: 16px;
+  border-bottom: 2px solid #e3f2fd;
+  padding-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-title::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  background: #1976d2;
+  border-radius: 50%;
+}
+
+.form-row {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.form-row mat-form-field {
+  flex: 1;
+}
+
+.full-width {
+  width: 100%;
+}
+
+mat-form-field {
+  margin-bottom: 8px;
+}
+
+.dialog-actions {
+  border-top: 1px solid #e0e0e0;
+  background: linear-gradient(145deg, #fafafa 0%, #f5f5f5 100%);
+  flex-shrink: 0;
+}
+
+.dialog-actions button {
+  min-width: 100px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Date input styling - allow manual entry */
+input[matInput][matDatepicker] {
+  cursor: text !important;
+}
+
+/* Primary button styling */
+.mat-mdc-raised-button.mat-primary {
+  background-color: #1976d2 !important;
+  color: white !important;
+}
+
+.mat-mdc-raised-button.mat-primary:hover {
+  background-color: #1565c0 !important;
+  box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  .form-row {
+    flex-direction: column;
+  }
+
+  .dialog-actions {
+    flex-direction: column-reverse;
+    gap: 12px;
+    padding: 16px 20px;
+  }
+
+  .dialog-actions button {
+    width: 100%;
+  }
+
+  .form-section {
+    padding: 16px;
+  }
+}
+
+/* Enhanced button styling */
+button[disabled] {
+  opacity: 0.6;
+}

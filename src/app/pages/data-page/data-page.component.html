@@ -1,0 +1,75 @@
+<div class="data-page-container">
+  <!-- Filter Section -->
+  <div class="filter-section">
+    <mat-form-field appearance="outline" class="filter-input">
+      <mat-label>Filter</mat-label>
+      <input matInput [formControl]="filterControl" placeholder="ID: 123, Grade > 80, Date < 2024-06-01">
+      <mat-hint>Use ID:, Grade >, Grade <, Date >, Date < for advanced filtering</mat-hint>
+    </mat-form-field>
+
+    <div class="action-buttons">
+      <button mat-raised-button color="primary" (click)="addTrainee()" data-testid="add-trainee-btn">
+        <mat-icon>add</mat-icon>
+        Add
+      </button>
+
+      <button mat-raised-button color="warn" [disabled]="!selectedTrainee()" (click)="removeTrainee()" data-testid="remove-trainee-btn">
+        <mat-icon>delete</mat-icon>
+        Remove
+      </button>
+    </div>
+  </div>
+
+  <!-- Data Grid -->
+  <div class="grid-container">
+    <mat-table [dataSource]="paginatedResults()" class="trainee-table" data-testid="trainees-table">
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+        <mat-cell *matCellDef="let trainee">{{ trainee.id }}</mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+        <mat-cell *matCellDef="let trainee">{{ trainee.name }}</mat-cell>
+      </ng-container>
+
+      <!-- Date Column -->
+      <ng-container matColumnDef="date">
+        <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
+        <mat-cell *matCellDef="let trainee">{{ trainee.date | date:'shortDate' }}</mat-cell>
+      </ng-container>
+
+      <!-- Grade Column -->
+      <ng-container matColumnDef="grade">
+        <mat-header-cell *matHeaderCellDef>Grade</mat-header-cell>
+        <mat-cell *matCellDef="let trainee">{{ trainee.grade }}</mat-cell>
+      </ng-container>
+
+      <!-- Subject Column -->
+      <ng-container matColumnDef="subject">
+        <mat-header-cell *matHeaderCellDef>Subject</mat-header-cell>
+        <mat-cell *matCellDef="let trainee">{{ trainee.subject }}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row
+        *matRowDef="let row; columns: displayedColumns;"
+        [class.selected-row]="selectedTrainee()?.id === row.id"
+        (click)="selectTrainee(row)"
+        data-testid="trainee-row"
+      ></mat-row>
+    </mat-table>
+
+    <!-- Pagination -->
+    <mat-paginator [length]="filteredResults().length" [pageSize]="pageSize()" [pageSizeOptions]="[5, 10, 20]"
+                   [pageIndex]="currentPage()" (page)="onPageChange($event)" showFirstLastButtons data-testid="pagination">
+    </mat-paginator>
+  </div>
+
+  <!-- Results Info -->
+  <div class="results-info">
+    Showing {{ paginatedResults().length }} of {{ filteredResults().length }} results
+  </div>
+</div>
