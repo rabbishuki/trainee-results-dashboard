@@ -47,5 +47,63 @@ This will run Jest in watch mode with coverage reporting.
 
 This section documents important architectural and design decisions made during development:
 
-- Only one subject per trainee ID is allowed
-- (Additional decisions will be added here as they are made)
+### Architecture & Design Decisions
+#### Frontend Framework
+
+- Angular with Standalone Components - Modern Angular approach, no modules needed
+- Angular Material Design - Comprehensive UI component library for consistent design
+- Angular Signals - Modern reactive state management for better performance and developer experience
+
+#### Reactive Programming Patterns
+
+- Manual signal updates for CRUD operations - Immediate updates for add/edit/delete operations without debouncing
+- Separation of concerns: Search observables for user input, direct signal updates for data changes
+
+#### State Management Strategy
+
+- Signals for local component state - Modern Angular approach for reactive UI updates
+- localStorage for state persistence - Page state (filter, pagination) persists across navigation
+- Service-level data change notifications - dataChanged$ observable for coordinating updates across components
+
+#### Data Flow Design
+
+- Immutable updates at component boundary - Service uses normal array operations, component creates new references for signals
+- Single source of truth - Service holds the canonical data, components react to changes
+- Reactive pipeline: Filter changes + Data changes → Search results → Signal updates → UI updates
+
+#### Form & Validation Strategy
+
+- Reactive Forms with comprehensive validation - Type-safe forms with real-time validation feedback
+- Manual date entry enabled - Users can type dates or use datepicker for better UX
+- Sectioned form layout - Logical grouping of related fields for better usability
+
+#### Testing Approach
+
+- Jest for unit testing - Modern testing framework with better performance than Karma
+- Service mocking - Isolated component testing with jasmine spies
+- Observable testing - Proper async testing patterns for reactive code
+
+#### UI/UX Decisions
+
+- Material Dialog over native dialog - Better accessibility and consistent styling
+- OnPush change detection - Performance optimization
+- Mobile-responsive design - Adaptive layouts for different screen sizes
+- Visual feedback - Row selection, hover states, loading indicators
+
+#### Performance Optimizations
+
+- Single-pass filtering - Efficient search algorithm that filters data in one iteration
+- Computed signals for derived state - Automatic recalculation only when dependencies change
+
+#### Code Organization
+
+- Feature-based structure - Components grouped by functionality
+- Standalone components - No Angular modules, cleaner dependency injection
+- TypeScript strict mode - Better type safety and developer experience
+
+#### Trade-offs Made
+
+- Manual array spreading for signals - Chose immutability at component boundary over service-level immutability
+- localStorage over session storage - Persistent state across browser sessions
+- Dialog for details over inline editing - Better mobile experience and focused editing
+- Synchronous + reactive hybrid - Combined immediate CRUD updates with debounced search for optimal UX

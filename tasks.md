@@ -1,0 +1,14 @@
+- [x] Initial commit: Project setup
+- [x] Enhance: Add Angular Material
+- [x] Enhance: Add jest as test runner
+- [x] Feature: Add data service with mock data & unit tests
+- [x] Feature: Data page with filtering
+- [x] Polish: Update Readme with decisions and task list
+- [ ] Feature: Analysis page with analysis placeholder
+- [ ] Feature: Monitor page with status filtering
+- [ ] Feature: Add signals for state management
+- [ ] Feature: Add observables for data flow
+- [ ] Test: Add component tests
+- [ ] Refactor: Extract reusable components
+- [ ] Feature: Add state persistence
+- [ ] Polish: Add form validation
